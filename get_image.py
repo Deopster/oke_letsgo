@@ -33,7 +33,7 @@ class Bing:
         except Exception as e:
             print('Error 403 bot check for ' + link, e)
     def run(self,req):
-        self.query = req.replace(' ', '+').replace('…', '').replace('@', '').replace('(', '').replace(')', '')
+        self.query = req.replace(' ', '+').replace('…', '').replace('@', '').replace('(', '').replace(')', '').replace("‘"," ")
         request_url = 'https://www.bing.com/images/async?q=' + self.query \
                       + '&qft=' + 'filterui:photo-photo'
         request = urllib.request.Request(request_url, None, headers=self.headers)

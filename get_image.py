@@ -7,6 +7,7 @@ import re
 import imghdr
 import os
 from pathlib import Path
+from LOLES import photoshop
 class Bing:
     def __init__(self):
         self.headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) ' 
@@ -50,19 +51,11 @@ class Bing:
             if not imghdr.what(None, image):
                 print('[Error]Invalid image, not saving {}\n'.format(link))
                 raise ValueError('Invalid image, not saving {}\n'.format(link))
-            with open("./files/"+str(self.download_count)+req+".jpg", 'wb') as f:
+            filename="./files/"+str(self.download_count)+".jpg"
+            with open(filename, 'wb') as f:
                 f.write(image)
-            im = Image.open(os.path.join(path, file))
-
-            # im.size includes the height and width of image
-            width, height = im.size
-            print(width, height)
-
-            # resizing
-            imResize = im.resize((mean_width, mean_height), Image.ANTIALIAS)
-            imResize.save(file, 'JPEG', quality=95)  # setting quality
+            photoshop(str(self.download_count)+".jpg",req.replace("+"," "))
             self.download_count += 1
-
             return True
         except Exception as e:
             print('Error 403 bot check for '+link, e)

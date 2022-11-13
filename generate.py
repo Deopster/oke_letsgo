@@ -1,18 +1,16 @@
+import os
 import cv2
-import numpy as np
-import glob
-from PIL import Image
-
-frameSize = (1920, 1080)
-
-out = cv2.VideoWriter('output_video.avi',cv2.VideoWriter_fourcc(*'DIVX'), 1, frameSize)
-count = 0
-for filename in glob.glob('C:/Users/andre/Pictures/*.jpg'):
-    img = Image.open(filename)
-    new_image = img.resize((1920, 1080))
-    cv2_img = np.array(new_image)
-    img = cv2.cvtColor(cv2_img, cv2.COLOR_RGB2BGR)
-    out.write(img)
-    count+=1
-print(count)
-out.release()
+from glob import glob
+def gener():
+    frameSize = (1920, 1080)
+    out = cv2.VideoWriter('output_video.avi',cv2.VideoWriter_fourcc(*'DIVX'), 1, frameSize)
+    count = 0
+    pics=[]
+    files=glob(os.path.join('C:/Users/andre/PycharmProjects/oke_letsgo/final/','*.jpg'))
+    for i in files:
+        pics.append(int(i[48:-4]))
+    for filename in sorted(pics):
+        print(filename)
+        img = cv2.imread('C:/Users/andre/PycharmProjects/oke_letsgo/final/'+str(filename)+'.jpg')
+        out.write(img)
+    out.release()

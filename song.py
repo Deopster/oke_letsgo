@@ -7,8 +7,8 @@ class SONG:
 
     def find(self):
         genius = lyricsgenius.Genius(self.token)
-        artist = genius.search_artist("bring me the horizon", max_songs=1, sort="title")
-        song = artist.song("can you feel my heart")
+        artist = genius.search_artist("hollywood undead", max_songs=1, sort="title")
+        song = artist.song("undead")
         temp = ''
         n = 0
         words = []

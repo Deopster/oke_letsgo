@@ -10,7 +10,6 @@ def gener():
     for i in files:
         pics.append(int(i[48:-4]))
     for filename in sorted(pics):
-        print(filename)
         img = cv2.imread('C:/Users/andre/PycharmProjects/oke_letsgo/final/'+str(filename)+'.jpg')
         out.write(img)
     out.release()

@@ -1,12 +1,9 @@
-import posixpath
+
 import random
-import time
 import urllib.request
 import urllib
 import re
 import imghdr
-import os
-from pathlib import Path
 from LOLES import photoshop
 class Bing:
     def __init__(self):
@@ -47,7 +44,7 @@ class Bing:
     def save_image(self, link,req):
         try:
             request = urllib.request.Request(link, None, self.headers)
-            image = urllib.request.urlopen(request, timeout=2).read()
+            image = urllib.request.urlopen(request, timeout=1).read()
             if not imghdr.what(None, image):
                 print('[Error]Invalid image, not saving {}\n'.format(link))
                 raise ValueError('Invalid image, not saving {}\n'.format(link))

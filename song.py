@@ -2,30 +2,34 @@ from get_image import Bing
 
 import lyricsgenius
 class SONG:
-    def __init__(self, name,token):
-        self.song = name
+    def __init__(self,token):
         self.token= token
 
-    def fing(self):
+    def find(self):
         genius = lyricsgenius.Genius(self.token)
-        artist = genius.search_artist("Andy Shauf", max_songs=1, sort="title")
-        song = artist.song("To You")
+        artist = genius.search_artist("twenty one pilots", max_songs=1, sort="title")
+        song = artist.song("Heathens")
         temp = ''
         n = 0
         words = []
-        for i in song.lyrics.replace('\n', " "):
-            if i == " ":
-                if n < 4:
-                    temp = temp + i
-                    n += 1
-                else:
+        check=False
+        for i in song.lyrics.replace('\n', "@"):
+            if i == "@" or i=="," or i=="!" or i=="." or i=="?":
                     words.append(temp)
                     temp = ''
                     n = 0
+            elif i=="[" or i=="]":
+                check= not check
+            elif check==True:
+                pass
+            elif n>=11 and i == " ":
+                words.append(temp)
+                temp = ''
+                n = 0
             else:
                 temp = temp + i
                 n += 1
             # print("DEBUG"+ " "+temp+" "+str(n))
-        print(words)
+        return words
 
 
